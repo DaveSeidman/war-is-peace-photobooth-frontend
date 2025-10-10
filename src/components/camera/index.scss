@@ -1,9 +1,15 @@
 .camera {
-  position: absolute;
-  inset: 0;
+  // position: absolute;
+  // inset: 0;
 
   &-video {
+    // display: none;
+    height: 0;
+  }
+
+  &-canvas {
     opacity: .5;
     transform: scaleX(-1);
+
   }
 }
