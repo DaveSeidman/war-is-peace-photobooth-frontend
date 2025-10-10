@@ -1,0 +1,9 @@
+.camera {
+  position: absolute;
+  inset: 0;
+
+  &-video {
+    opacity: .5;
+    transform: scaleX(-1);
+  }
+}
