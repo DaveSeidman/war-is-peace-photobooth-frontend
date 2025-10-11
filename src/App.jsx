@@ -13,6 +13,9 @@ const App = () => {
   const [started, setStarted] = useState(false);
   const [takePhoto, setTakePhoto] = useState(false);
   const [originalPhoto, setOriginalPhoto] = useState();
+  const [originalPhotoBlob, setOriginalBlob] = useState();
+  const [alteredPhoto, setAlteredPhoto] = useState();
+  const [awaitingEdit, setAwaitingEdit] = useState(true);
 
   const IDLE_DELAY = 60000;
   const ATTRACT_DELAY = 10000;
@@ -43,31 +46,26 @@ const App = () => {
     const url = `${BACKEND_URL}/edit/past`
     const data = new FormData();
     const options = { headers: { "Content-Type": "multipart/form-data" } }
-    data.append("photo", originalPhoto, "photo.jpg");
-
-
+    data.append("photo", photo, "photo.jpg");
+    setAwaitingEdit(true);
     const response = await axios.post(url, data, options)
-    console.log(response.data.filename)
+    setAwaitingEdit(false);
+    if (!response.data.output) return console.log('no output')
+    setAlteredPhoto(response.data.output.url)
   }
 
   useEffect(() => {
     if (originalPhoto) {
-      // console.log(originalPhoto)
-      uploadPhoto(originalPhoto)
-
+      setAlteredPhoto(null)
+      uploadPhoto(originalPhotoBlob)
     }
 
-  }, [originalPhoto])
+  }, [originalPhotoBlob])
+
 
   useEffect(() => {
-
     addEventListener('click', resetIdleTimeout);
-
-    return (() => {
-      removeEventListener('click', resetIdleTimeout);
-    })
-
-
+    return (() => { removeEventListener('click', resetIdleTimeout); })
   }, [])
 
   return (
@@ -78,11 +76,15 @@ const App = () => {
         takePhoto={takePhoto}
         setTakePhoto={setTakePhoto}
         setOriginalPhoto={setOriginalPhoto}
+        setOriginalBlob={setOriginalBlob}
       />
       <UI
         started={started}
         originalPhoto={originalPhoto}
+        alteredPhoto={alteredPhoto}
         setTakePhoto={setTakePhoto}
+        awaitingEdit={awaitingEdit}
+
       />
       <Attract attract={attract} />
       <Idle idle={idle} />

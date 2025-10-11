@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./index.scss";
 
-export default function Camera({ started, setStarted, takePhoto, setTakePhoto, setOriginalPhoto }) {
+export default function Camera({ started, setStarted, takePhoto, setTakePhoto, setOriginalPhoto, setOriginalBlob }) {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const frameRef = useRef(null);
@@ -43,11 +43,11 @@ export default function Camera({ started, setStarted, takePhoto, setTakePhoto, s
         if (!blob) return;
 
         // optional: preview locally
-        // const localURL = URL.createObjectURL(blob);
-        // setOriginalPhoto(localURL);
+        const localURL = URL.createObjectURL(blob);
+        setOriginalPhoto(localURL);
 
         // Upload to your Node server
-        setOriginalPhoto(blob);
+        setOriginalBlob(blob);
         setTakePhoto(false);
       }, "image/jpeg", 0.9); // adjust quality if needed
     }
