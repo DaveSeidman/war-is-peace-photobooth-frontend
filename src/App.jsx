@@ -15,7 +15,7 @@ const App = () => {
   const [originalPhoto, setOriginalPhoto] = useState();
   const [originalPhotoBlob, setOriginalBlob] = useState();
   const [alteredPhoto, setAlteredPhoto] = useState();
-  const [awaitingEdit, setAwaitingEdit] = useState(true);
+  const [awaitingEdit, setAwaitingEdit] = useState(false);
 
   const IDLE_DELAY = 60000;
   const ATTRACT_DELAY = 10000;
