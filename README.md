@@ -1,1 +1,1 @@
-# 📸 War is Peace - Phootbooth
+# 📸 War is Peace - Phootbooth (frontend)
