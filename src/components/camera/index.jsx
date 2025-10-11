@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./index.scss";
 
-export default function Camera({ started, setStarted, takePhoto, setTakePhoto, setPhoto }) {
+export default function Camera({ started, setStarted, takePhoto, setTakePhoto, setOriginalPhoto }) {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const frameRef = useRef(null);
@@ -43,24 +43,11 @@ export default function Camera({ started, setStarted, takePhoto, setTakePhoto, s
         if (!blob) return;
 
         // optional: preview locally
-        const localURL = URL.createObjectURL(blob);
-        setPhoto(localURL);
+        // const localURL = URL.createObjectURL(blob);
+        // setOriginalPhoto(localURL);
 
         // Upload to your Node server
-        const formData = new FormData();
-        formData.append("photo", blob, "photo.jpg");
-
-        try {
-          const res = await fetch("http://localhost:8000/upload", {
-            method: "POST",
-            body: formData,
-          });
-          const data = await res.json();
-          console.log("Upload complete:", data);
-        } catch (err) {
-          console.error("Upload failed:", err);
-        }
-
+        setOriginalPhoto(blob);
         setTakePhoto(false);
       }, "image/jpeg", 0.9); // adjust quality if needed
     }

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import axios from 'axios';
 import UI from './components/ui';
 import Camera from './components/camera';
 import Attract from './components/attract';
@@ -11,15 +12,16 @@ const App = () => {
   const [idle, setIdle] = useState(false);
   const [started, setStarted] = useState(false);
   const [takePhoto, setTakePhoto] = useState(false);
-  const [photo, setPhoto] = useState();
+  const [originalPhoto, setOriginalPhoto] = useState();
 
-  const IDLE_DELAY = 5000;
-  const ATTRACT_DELAY = 5000;
+  const IDLE_DELAY = 60000;
+  const ATTRACT_DELAY = 10000;
+  const BACKEND_URL = location.host === 'daveseidman.github.io'
+    ? 'https://war-is-peace-photobooth-backend.onrender.com'
+    : 'http://localhost:8000'
 
   const idleTimeout = useRef();
   const attractTimeout = useRef();
-
-
 
   const resetIdleTimeout = () => {
     if (idleTimeout.current) clearTimeout(idleTimeout.current)
@@ -36,6 +38,26 @@ const App = () => {
       }, ATTRACT_DELAY);
     }, IDLE_DELAY);
   }
+
+  const uploadPhoto = async (photo) => {
+    const url = `${BACKEND_URL}/edit/past`
+    const data = new FormData();
+    const options = { headers: { "Content-Type": "multipart/form-data" } }
+    data.append("photo", originalPhoto, "photo.jpg");
+
+
+    const response = await axios.post(url, data, options)
+    console.log(response.data.filename)
+  }
+
+  useEffect(() => {
+    if (originalPhoto) {
+      // console.log(originalPhoto)
+      uploadPhoto(originalPhoto)
+
+    }
+
+  }, [originalPhoto])
 
   useEffect(() => {
 
@@ -55,11 +77,11 @@ const App = () => {
         setStarted={setStarted}
         takePhoto={takePhoto}
         setTakePhoto={setTakePhoto}
-        setPhoto={setPhoto}
+        setOriginalPhoto={setOriginalPhoto}
       />
       <UI
         started={started}
-        photo={photo}
+        originalPhoto={originalPhoto}
         setTakePhoto={setTakePhoto}
       />
       <Attract attract={attract} />

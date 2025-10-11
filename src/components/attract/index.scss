@@ -4,6 +4,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background: rgba(255, 0, 0, .5);
+  transition: opacity .5s, visibility .5s;
 
   h1 {
     color: white;
