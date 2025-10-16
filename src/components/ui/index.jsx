@@ -3,7 +3,7 @@ import './index.scss';
 
 export default function UI({
   setCountdown,
-  awaitingEdit
+  // awaitingEdit
 }) {
 
 
@@ -15,7 +15,7 @@ export default function UI({
       >
         Take Photo!
       </button>
-      {awaitingEdit && (<p className="ui-loading">Loading...</p>)}
+      {/* {awaitingEdit && (<p className="ui-loading">Loading...</p>)} */}
     </div>
   )
 }

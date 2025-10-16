@@ -1,0 +1,24 @@
+.photos {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  
+  &-strip {
+    position: absolute;
+    left: 75%;
+    top: 50%;
+    width: 25%;
+    height: 90%;
+    transform: translate(-50%, -50%);
+    outline: 1px solid white;
+    display: flex;
+    flex-direction: column;
+
+    img {
+      height: 33%;
+      width: 100%;
+      object-fit: cover;
+
+    }
+  }
+}

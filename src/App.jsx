@@ -3,6 +3,7 @@ import axios from 'axios';
 import UI from './components/ui';
 import Camera from './components/camera';
 import Countdown from './components/countdown';
+import Photos from './components/photos';
 import Attract from './components/attract';
 import Idle from './components/idle';
 import './index.scss';
@@ -18,6 +19,10 @@ const App = () => {
   const [originalPhotoBlob, setOriginalBlob] = useState();
   const [alteredPhoto, setAlteredPhoto] = useState();
   const [awaitingEdit, setAwaitingEdit] = useState(false);
+
+  const [pastPhoto, setPastPhoto] = useState();
+  const [presentPhoto, setPresentPhoto] = useState();
+  const [futurePhoto, setFuturePhoto] = useState();
 
   const IDLE_DELAY = 60000;
   const ATTRACT_DELAY = 10000;
@@ -81,13 +86,14 @@ const App = () => {
         setOriginalPhoto={setOriginalPhoto}
         setOriginalBlob={setOriginalBlob}
       />
+      <Photos
+        pastPhoto={pastPhoto}
+        presentPhoto={presentPhoto}
+        futurePhoto={futurePhoto}
+      />
       <UI
-        // started={started}
-        // originalPhoto={originalPhoto}
-        // alteredPhoto={alteredPhoto}
         setCountdown={setCountdown}
-        awaitingEdit={awaitingEdit}
-
+      // awaitingEdit={awaitingEdit}
       />
       <Countdown
         countdown={countdown}
