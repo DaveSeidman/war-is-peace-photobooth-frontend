@@ -1,12 +1,13 @@
-.idle {
+.countdown {
   position: absolute;
   inset: 0;
+  background: rgba(0, 255, 0, .5);
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(0, 0, 255, .5);
 
-  p {
+  &-timer {
+    font-size: 2rem;
     color: white;
   }
 }

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import UI from './components/ui';
 import Camera from './components/camera';
+import Countdown from './components/countdown';
 import Attract from './components/attract';
 import Idle from './components/idle';
 import './index.scss';
@@ -11,6 +12,7 @@ const App = () => {
   const [attract, setAttract] = useState(true);
   const [idle, setIdle] = useState(false);
   const [started, setStarted] = useState(false);
+  const [countdown, setCountdown] = useState(false);
   const [takePhoto, setTakePhoto] = useState(false);
   const [originalPhoto, setOriginalPhoto] = useState();
   const [originalPhotoBlob, setOriginalBlob] = useState();
@@ -43,7 +45,7 @@ const App = () => {
   }
 
   const uploadPhoto = async (photo) => {
-    const url = `${BACKEND_URL}/edit/past`
+    const url = `${BACKEND_URL}/edit/western`
     const data = new FormData();
     const options = { headers: { "Content-Type": "multipart/form-data" } }
     data.append("photo", photo, "photo.jpg");
@@ -75,16 +77,22 @@ const App = () => {
         setStarted={setStarted}
         takePhoto={takePhoto}
         setTakePhoto={setTakePhoto}
+        // TODO: move these out
         setOriginalPhoto={setOriginalPhoto}
         setOriginalBlob={setOriginalBlob}
       />
       <UI
-        started={started}
-        originalPhoto={originalPhoto}
-        alteredPhoto={alteredPhoto}
-        setTakePhoto={setTakePhoto}
+        // started={started}
+        // originalPhoto={originalPhoto}
+        // alteredPhoto={alteredPhoto}
+        setCountdown={setCountdown}
         awaitingEdit={awaitingEdit}
 
+      />
+      <Countdown
+        countdown={countdown}
+        setCountdown={setCountdown}
+        setTakePhoto={setTakePhoto}
       />
       <Attract attract={attract} />
       <Idle idle={idle} />
