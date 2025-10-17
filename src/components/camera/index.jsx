@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import testVideo from '../../assets/videos/test1.mp4';
+import testVideo from '../../assets/videos/test2.mp4';
 import "./index.scss";
 
 export default function Camera({ takePhoto, setTakePhoto, setOriginalPhoto, setOriginalBlob }) {

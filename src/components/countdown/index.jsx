@@ -6,7 +6,7 @@ export default function Countdown({ countdown, setCountdown, setTakePhoto }) {
   const [count, setCount] = useState(3);
 
   const tick = () => {
-    setCount((prev) => Math.max(prev - 1, -1));
+    setCount((prev) => Math.max(prev - 1, 0));
   }
 
   useEffect(() => {
@@ -21,7 +21,7 @@ export default function Countdown({ countdown, setCountdown, setTakePhoto }) {
   }, [countdown])
 
   useEffect(() => {
-    if (count < 0) {
+    if (count <= 0) {
       setTakePhoto(true);
       setCountdown(false);
     }

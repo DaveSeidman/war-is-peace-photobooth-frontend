@@ -1,34 +1,24 @@
 .camera {
-  // position: absolute;
-  // inset: 0;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
 
   &-video {
-    // display: none;
-    // height: 0;
     transform: scaleX(-1) translateY(-50%);
     position: absolute;
     left: 12.5%;
     top: 50%;
-
   }
 
   &-start {
     position: absolute;
     left: 33%;
     top: 50%;
+    pointer-events: all;
     transform: translate(-50%, -50%);
   }
 
   &-canvas {
     display: none;
-    // opacity: .5;
-    // transform: scaleX(-1);
-    // position: absolute;
-    // top: 0;
-    // left: 0;
-    // width: 50%;
-    // height: 50%;
-    // object-fit: cover;
-
   }
 }

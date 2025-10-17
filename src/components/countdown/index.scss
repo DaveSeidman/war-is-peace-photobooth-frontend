@@ -5,7 +5,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
+  transition: opacity .5s, visibility .5s;
   &-timer {
     font-size: 2rem;
     color: white;
