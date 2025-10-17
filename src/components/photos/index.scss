@@ -18,13 +18,15 @@
       height: 33%;
       width: 100%;
       object-fit: cover;
+      transition: opacity 1s, visibility 1s;
     }
   }
 
   &-download {
     position: absolute;
-    top: 0;
+    top: 50%;
     right: 0;
+    transform: translate(-50%, -50%);
 
     &-link {
       display: block;

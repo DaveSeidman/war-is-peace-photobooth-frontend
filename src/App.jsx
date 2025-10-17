@@ -114,6 +114,8 @@ const App = () => {
               />
               <UI
                 setCountdown={setCountdown}
+                countdown={countdown}
+                originalPhoto={originalPhoto}
               />
               <Countdown
                 countdown={countdown}

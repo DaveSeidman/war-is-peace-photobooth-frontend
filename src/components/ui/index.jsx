@@ -3,14 +3,15 @@ import './index.scss';
 
 export default function UI({
   setCountdown,
-  // awaitingEdit
+  countdown,
+  originalPhoto,
 }) {
 
 
   return (
     <div className="ui">
       <button
-        className="ui-capture"
+        className={`ui-capture ${countdown || originalPhoto ? 'hidden' : ''}`}
         onClick={() => setCountdown(true)}
       >
         Take Photo!

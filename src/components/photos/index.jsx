@@ -15,9 +15,9 @@ export default function Photos({ basename, photoId, pastPhoto, originalPhoto, fu
   return (
     <div className="photos">
       <div className="photos-strip">
-        <img className="photos-strip-past" src={pastPhoto} />
-        <img className="photos--strip-present" src={originalPhoto} />
-        <img className="photos-strip-future" src={futurePhoto} />
+        <img className={`photos-strip-past ${pastPhoto ? '' : 'hidden'}`} src={pastPhoto} />
+        <img className={`photos--strip-present ${originalPhoto ? '' : 'hidden'}`} src={originalPhoto} />
+        <img className={`photos-strip-future ${futurePhoto ? '' : 'hidden'}`} src={futurePhoto} />
       </div>
       <div className={`photos-download ${photoId ? '' : 'hidden'}`}>
         <a

@@ -24,8 +24,18 @@ $titleHeight: 15vh;
     top: $titleHeight;
     width: calc(100% - 2rem);
     margin: 0 1rem;
-    height: calc(100% - $titleHeight);
+    height: calc(100% - $titleHeight - 3rem);
     object-fit: contain;
     object-position: center center;
+    transform: scaleX(-100%);
+  }
+
+  &-download {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    margin: 1rem 0;
   }
 }

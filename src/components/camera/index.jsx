@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import testVideo from '../../assets/videos/test2.mp4';
+import testVideo from '../../assets/videos/test.mp4';
 import "./index.scss";
 
 export default function Camera({ takePhoto, setTakePhoto, setOriginalPhoto, setOriginalBlob }) {
@@ -8,22 +8,38 @@ export default function Camera({ takePhoto, setTakePhoto, setOriginalPhoto, setO
   const canvasRef = useRef(null);
   const frameRef = useRef(null);
 
-  // const [cameraStarted, setCameraStarted] = useState(false);
+  const toggleCamera = async () => {
+    if (!cameraStarted) {
+      // Start webcam
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: { facingMode: "user" },
+        audio: false,
+      });
+      videoRef.current.srcObject = stream;
+      videoRef.current.loop = false; // stop looping the background video
+      setCameraStarted(true);
+    } else {
+      // Stop webcam
+      const stream = videoRef.current.srcObject;
+      if (stream && stream.getTracks) {
+        stream.getTracks().forEach((track) => track.stop());
+      }
 
-  const startCamera = async () => {
-    const stream = await navigator.mediaDevices.getUserMedia({
-      video: { facingMode: "user" },
-      audio: false,
-    });
-    videoRef.current.srcObject = stream;
-    setCameraStarted(true);
+      // Clear webcam feed
+      videoRef.current.srcObject = null;
+
+      // Reset to your test video and resume playback
+      videoRef.current.src = testVideo;
+      videoRef.current.loop = true;
+      await videoRef.current.play().catch(() => { }); // avoid unhandled promise errors
+
+      setCameraStarted(false);
+    }
   };
 
-  useEffect(() => {
-    // if (!started) return;
 
-    // startCamera();
-    // console.log('here')
+  useEffect(() => {
+
     const ctx = canvasRef.current.getContext('2d');
 
     const draw = () => {
@@ -74,7 +90,7 @@ export default function Camera({ takePhoto, setTakePhoto, setOriginalPhoto, setO
       </video>
       <canvas ref={canvasRef} className="camera-canvas" />
       {/* TODO add toggle to turn off camera as well */}
-      {!cameraStarted && (<button className="camera-start" onClick={startCamera}>Start Camera</button>)}
+      {<button className="camera-start" onClick={toggleCamera}>{cameraStarted ? 'stop camera' : 'start camera'}</button>}
     </div>
   );
 }
