@@ -30,7 +30,7 @@ const App = () => {
   const ATTRACT_DELAY = 10000;
   const BACKEND_URL = location.host === 'daveseidman.github.io'
     ? 'https://war-is-peace-photobooth-backend.onrender.com'
-    : 'http://localhost:8000'
+    : `http://${location.hostname}:8000`
   const basename = 'war-is-peace-photobooth-frontend'
   const idleTimeout = useRef();
   const attractTimeout = useRef();

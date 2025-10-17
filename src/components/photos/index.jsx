@@ -5,6 +5,11 @@ import './index.scss';
 
 export default function Photos({ basename, photoId, pastPhoto, originalPhoto, futurePhoto }) {
 
+  const BACKEND_URL = location.host === 'daveseidman.github.io'
+    ? 'https://war-is-peace-photobooth-backend.onrender.com'
+    : `http://${location.hostname}:8080`
+
+  const link = `${BACKEND_URL}/#/takeaway/${photoId}`;
   return (
     <div className="photos">
       <div className="photos-strip">
@@ -18,7 +23,7 @@ export default function Photos({ basename, photoId, pastPhoto, originalPhoto, fu
           href={`#/takeaway/${photoId}`}
           target="_blank"
         >
-          <QRCode value={`${location.origin}/${basename}/#/takeaway/${photoId}`} />
+          <QRCode value={link} />
         </a>
       </div>
     </div>
