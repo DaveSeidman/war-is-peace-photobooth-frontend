@@ -7,8 +7,8 @@ export default defineConfig({
   server: {
     port: 8080,
     host: true,
-    proxy: {
-      '/photos': 'http://localhost:8000'
-    }
+    // proxy: {
+    //   '/photos': 'http://localhost:8000'
+    // }
   },
 });
