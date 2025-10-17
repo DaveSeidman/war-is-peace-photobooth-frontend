@@ -6,7 +6,7 @@ import './index.scss';
 export default function Photos({ basename, photoId, pastPhoto, originalPhoto, futurePhoto }) {
 
   const BACKEND_URL = location.host === 'daveseidman.github.io'
-    ? location.hostname
+    ? location.href
     : `http://${location.hostname}:8080`
 
   // this is the link that takes us to the correct takeaway site with the photoId
