@@ -3,7 +3,7 @@ import { QRCode } from 'react-qrcode'
 
 import './index.scss';
 
-export default function Photos({ downloadLink, pastPhoto, originalPhoto, futurePhoto }) {
+export default function Photos({ basename, photoId, pastPhoto, originalPhoto, futurePhoto }) {
 
   return (
     <div className="photos">
@@ -12,13 +12,13 @@ export default function Photos({ downloadLink, pastPhoto, originalPhoto, futureP
         <img className="photos--strip-present" src={originalPhoto} />
         <img className="photos-strip-future" src={futurePhoto} />
       </div>
-      <div className="photos-download">
+      <div className={`photos-download ${photoId ? '' : 'hidden'}`}>
         <a
           className="photos-download-link"
-          href={downloadLink}
+          href={`#/takeaway/${photoId}`}
           target="_blank"
         >
-          <QRCode value={downloadLink} />
+          <QRCode value={`${location.origin}/${basename}/#/takeaway/${photoId}`} />
         </a>
       </div>
     </div>

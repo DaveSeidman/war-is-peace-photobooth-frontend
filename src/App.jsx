@@ -8,7 +8,9 @@ import Loading from './components/Loading';
 import Photos from './components/photos';
 import Attract from './components/attract';
 import Idle from './components/idle';
+
 import './index.scss';
+import Takeaway from './components/takeaway';
 
 const App = () => {
 
@@ -19,7 +21,7 @@ const App = () => {
   const [takePhoto, setTakePhoto] = useState(false);
   const [originalPhoto, setOriginalPhoto] = useState();
   const [originalPhotoBlob, setOriginalBlob] = useState();
-  const [downloadLink, setDownloadLink] = useState();
+  const [photoId, setPhotoId] = useState();
   const [loading, setLoading] = useState(false);
   const [pastPhoto, setPastPhoto] = useState();
   const [futurePhoto, setFuturePhoto] = useState();
@@ -29,7 +31,7 @@ const App = () => {
   const BACKEND_URL = location.host === 'daveseidman.github.io'
     ? 'https://war-is-peace-photobooth-backend.onrender.com'
     : 'http://localhost:8000'
-
+  const basename = 'war-is-peace-photobooth-frontend'
   const idleTimeout = useRef();
   const attractTimeout = useRef();
 
@@ -55,13 +57,14 @@ const App = () => {
     const options = { headers: { "Content-Type": "multipart/form-data" } }
     data.append("photo", photo, "photo.jpg");
     setLoading(true);
+    setPhotoId(null)
     const response = await axios.post(url, data, options)
     console.log(response)
     setLoading(false);
     if (!response.data.output) return console.log('no output')
     setPastPhoto(response.data.output.past)
     setFuturePhoto(response.data.output.future)
-    setDownloadLink(`${BACKEND_URL}${response.data.output.link}`);
+    setPhotoId(response.data.output.photoId);
     // setAlteredPhoto(response.data.output.url)
   }
 
@@ -98,14 +101,14 @@ const App = () => {
                 pastPhoto={pastPhoto}
                 originalPhoto={originalPhoto}
                 futurePhoto={futurePhoto}
-                downloadLink={downloadLink}
+                photoId={photoId}
+                basename={basename}
               />
               <Camera
                 started={started}
                 setStarted={setStarted}
                 takePhoto={takePhoto}
                 setTakePhoto={setTakePhoto}
-                // TODO: move these out
                 setOriginalPhoto={setOriginalPhoto}
                 setOriginalBlob={setOriginalBlob}
               />
@@ -117,15 +120,14 @@ const App = () => {
                 setCountdown={setCountdown}
                 setTakePhoto={setTakePhoto}
               />
-
               <Loading loading={loading} />
               <Attract attract={attract} />
               <Idle idle={idle} />
-              <a target="_blank" href="http://localhost:8080/war-is-peace-photobooth-frontend/#/download" style={{ position: 'absolute', bottom: 0, left: 0 }}>takeaway</a>
+              {/* <a target="_blank" href={ style={{ position: 'absolute', bottom: 0, left: 0 }}>takeaway</a> */}
             </>
           } />
-          <Route path="/download" element={
-            <p style={{ color: 'white' }}>Takeaway!</p>
+          <Route path="/takeaway/:photoId?" element={
+            <Takeaway />
           } />
         </Routes>
       </Router>
