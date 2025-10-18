@@ -39,7 +39,7 @@ export default function Takeaway() {
         <p>{photoId}</p>
       </div>
 
-      {photoUrl && (
+      {photoUrl ? (
         <>
           <img
             crossOrigin="anonymous"
@@ -53,6 +53,8 @@ export default function Takeaway() {
             📱 Share or Save Photo
           </button>
         </>
+      ) : (
+        <p>Sorry, we couldn't find your photo</p>
       )}
     </div>
   );

@@ -8,9 +8,10 @@ import Loading from './components/Loading';
 import Photos from './components/photos';
 import Attract from './components/attract';
 import Idle from './components/idle';
+import Takeaway from './components/takeaway';
+import { Leva, useControls } from 'leva';
 
 import './index.scss';
-import Takeaway from './components/takeaway';
 
 const App = () => {
 
@@ -25,8 +26,10 @@ const App = () => {
   const [loading, setLoading] = useState(false);
   const [pastPhoto, setPastPhoto] = useState();
   const [futurePhoto, setFuturePhoto] = useState();
+  const [controls, setControls] = useState(false);
+  const [promptDefaults, setPromptDefaults] = useState(null);
 
-  const IDLE_DELAY = 60000;
+  const IDLE_DELAY = 30000;
   const ATTRACT_DELAY = 10000;
   const BACKEND_URL = location.host === 'daveseidman.github.io'
     ? 'https://war-is-peace-photobooth-backend.onrender.com'
@@ -34,6 +37,13 @@ const App = () => {
   const basename = 'war-is-peace-photobooth-frontend'
   const idleTimeout = useRef();
   const attractTimeout = useRef();
+
+  const [{ pastPrompt, futurePrompt, removePrompt }, set] = useControls(() => ({
+    pastPrompt: { value: '' },
+    futurePrompt: { value: '' },
+    removePrompt: { value: '' },
+  }));
+
 
   const resetIdleTimeout = () => {
     if (idleTimeout.current) clearTimeout(idleTimeout.current)
@@ -56,6 +66,9 @@ const App = () => {
     const data = new FormData();
     const options = { headers: { "Content-Type": "multipart/form-data" } }
     data.append("photo", photo, "photo.jpg");
+    data.append("pastPrompt", pastPrompt);
+    data.append("futurePrompt", futurePrompt);
+    data.append("removePrompt", removePrompt);
     setLoading(true);
     setPhotoId(null)
     const response = await axios.post(url, data, options)
@@ -65,7 +78,10 @@ const App = () => {
     setPastPhoto(response.data.output.past)
     setFuturePhoto(response.data.output.future)
     setPhotoId(response.data.output.photoId);
-    // setAlteredPhoto(response.data.output.url)
+  }
+
+  const keyDown = ({ key }) => {
+    if (key === 'F1') setControls(prev => !prev);
   }
 
   useEffect(() => {
@@ -88,7 +104,25 @@ const App = () => {
 
   useEffect(() => {
     addEventListener('click', resetIdleTimeout);
-    return (() => { removeEventListener('click', resetIdleTimeout); })
+    addEventListener('keydown', keyDown);
+    fetch(`${BACKEND_URL}/prompts`)
+      .then(res => res.json())
+      .then(data => {
+        if (!data) return;
+        console.log('prompts from server:', data);
+        // safely apply values from server
+        set({
+          pastPrompt: data.past ?? '',
+          futurePrompt: data.future ?? '',
+          removePrompt: data.remove ?? '',
+        });
+      })
+      .catch(err => console.error('Failed to load prompts', err));
+
+    return (() => {
+      removeEventListener('click', resetIdleTimeout);
+      removeEventListener('keydown', keyDown);
+    })
   }, [])
 
   return (
@@ -125,7 +159,21 @@ const App = () => {
               <Loading loading={loading} />
               <Attract attract={attract} />
               <Idle idle={idle} />
-              {/* <a target="_blank" href={ style={{ position: 'absolute', bottom: 0, left: 0 }}>takeaway</a> */}
+              <Leva
+                hidden={!controls}
+                theme={{
+                  sizes: {
+                    rootWidth: '700px',
+                    controlWidth: '530px',
+                  },
+                  space: {
+                    colGap: '12px',
+                  },
+                  fontSizes: {
+                    root: '16px',
+                  },
+                }}
+              />
             </>
           } />
           <Route path="/takeaway/:photoId?" element={

@@ -1,3 +1,6 @@
+// TODO: add some sort of visual countdown around the QR code or more generally
+// so guests know that the booth will reset x-seconds after the QR code is displayed
+
 import React from "react";
 import { QRCode } from 'react-qrcode'
 
@@ -10,7 +13,6 @@ export default function Photos({ basename, photoId, pastPhoto, originalPhoto, fu
     : `http://${location.hostname}:8080`
 
   // this is the link that takes us to the correct takeaway site with the photoId
-
   const link = `${BACKEND_URL}/#/takeaway/${photoId}`;
   return (
     <div className="photos">
