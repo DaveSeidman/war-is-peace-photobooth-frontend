@@ -4,7 +4,7 @@ import axios from 'axios';
 import UI from './components/ui';
 import Camera from './components/camera';
 // import Countdown from './components/countdown';
-import Loading from './components/loading';
+import Loading from './components/loading2';
 import Photos from './components/photos';
 import Attract from './components/attract';
 import Idle from './components/idle';
