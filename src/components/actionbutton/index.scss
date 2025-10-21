@@ -1,17 +1,38 @@
-@use '../../../index.scss' as src;
+@use '../../index.scss' as src;
 
 .actionbutton {
   position: absolute;
-  bottom: 0px;
-  left: 50%;
   width: 440px;
-  transform: translateX(-50%);
   transition: transform .5s ease-in-out;
+  pointer-events: all;
+
+  &.bottom {
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  &.right {
+    right: 0;
+    top: 50%;
+    transform: rotate(-90deg) translateY(0) translateX(-50%);
+    transform-origin: 0 0;
+
+    .actionbutton {
+      &-foreground {
+        transform: rotate(90deg);
+        transform-origin: 50% 0;
+      }
+    }
+  }
 
   &.hidden {
     visibility: visible !important;
     opacity: 1 !important;
-    transform: translateX(-50%) translateY(100%);
+  }
+
+  &.hidden.bottom {
+    transform: translateX(-50%) translateY(100%) !important;
   }
 
   &-background {
@@ -62,7 +83,7 @@
 
       &:active {
         box-shadow: 0 0 5px rgba(0, 0, 0, .5);
-        transform: scale(.9)
+        transform: scale(.9);
       }
     }
   }

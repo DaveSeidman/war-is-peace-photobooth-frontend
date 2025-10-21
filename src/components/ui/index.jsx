@@ -2,12 +2,15 @@ import React, { useState, useRef, useEffect } from "react";
 import frameImage from '../../assets/images/frame4.svg';
 import logoImage from '../../assets/images/logo.png';
 import Camcornder from "./camcorder";
-import ActionButton from "./actionbutton";
+import ActionButton from "../actionbutton";
 import './index.scss';
 
 
 export default function UI({ setCountdown, countdown, originalPhoto, pastPhoto }) {
 
+  const takePhoto = () => {
+    setCountdown(true);
+  }
   return (
     <div className="ui">
       <img className="ui-frame" src={frameImage} />
@@ -17,10 +20,11 @@ export default function UI({ setCountdown, countdown, originalPhoto, pastPhoto }
         originalPhoto={originalPhoto}
       />
       <ActionButton
+        label="engage"
+        placement="bottom"
+        action={takePhoto}
         setCountdown={setCountdown}
-        countdown={countdown}
-        originalPhoto={originalPhoto}
-        pastPhoto={pastPhoto}
+        active={!countdown && !originalPhoto}
       />
     </div>
   )

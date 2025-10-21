@@ -3,11 +3,12 @@
 
 import React from "react";
 import { QRCode } from 'react-qrcode'
+import ActionButton from "../actionbutton";
 import Ticker from "../ticker";
 
 import './index.scss';
 
-export default function Photos({ basename, photoId, pastPhoto, originalPhoto, futurePhoto }) {
+export default function Photos({ reset, photoId, pastPhoto, originalPhoto, futurePhoto }) {
 
   const BACKEND_URL = location.host === 'daveseidman.github.io'
     ? location.href
@@ -22,17 +23,26 @@ export default function Photos({ basename, photoId, pastPhoto, originalPhoto, fu
   return (
     <div className={`photos ${originalPhoto ? '' : 'hidden'}`}>
       <div className="photos-frame">
-        <div className={`photos-frame-image past ${pastPhoto ? '' : 'hidden'}`}>
-          <img src={pastPhoto} />
-          <Ticker datetime={pastDatetime} />
-        </div>
         <div className={`photos-frame-image present ${originalPhoto ? '' : 'hidden'}`}>
           <img src={originalPhoto} />
-          <Ticker datetime={now} />
+          <Ticker
+            datetime={now}
+            color="red"
+          />
+        </div>
+        <div className={`photos-frame-image past ${pastPhoto ? '' : 'hidden'}`}>
+          <img src={pastPhoto} />
+          <Ticker
+            datetime={pastDatetime}
+            color="green"
+          />
         </div>
         <div className={`photos-frame-image future ${futurePhoto ? '' : 'hidden'}`}>
           <img src={futurePhoto} />
-          <Ticker datetime={futureDateTime} />
+          <Ticker
+            datetime={futureDateTime}
+            color="yellow"
+          />
         </div>
         <div className={`photos-frame-download ${photoId ? '' : 'hidden'}`}>
           <a
@@ -40,10 +50,23 @@ export default function Photos({ basename, photoId, pastPhoto, originalPhoto, fu
             href={`#/takeaway/${photoId}`}
             target="_blank"
           >
-            <QRCode value={link} />
+            <QRCode
+              value={link}
+              color={{
+                dark: '#b9b9b9',
+                light: '#000000'
+              }}
+              margin={2}
+
+            />
             Download
           </a>
-          {/* <ResetButton /> */}
+          <ActionButton
+            label="Reset"
+            active={originalPhoto && pastPhoto && futurePhoto}
+            placement="right"
+            action={reset}
+          />
         </div>
       </div>
 

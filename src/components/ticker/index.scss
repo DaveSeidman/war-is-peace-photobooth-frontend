@@ -18,9 +18,19 @@
     inset: 20px;
     font-family: 'Digital';
     text-transform: uppercase;
-    color: red;
     font-size: 2rem;
     word-spacing: 33px;
     white-space: nowrap;
+
+    &.red { 
+    color: red;
+
+    }
+    &.yellow {
+      color: yellow;
+    }
+    &.green {
+      color: green;
+    }
   }
 }

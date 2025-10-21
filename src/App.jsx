@@ -44,6 +44,12 @@ const App = () => {
     removePrompt: { value: '' },
   }));
 
+  const reset = () => {
+    setOriginalBlob(null)
+    setOriginalPhoto(null)
+    setPastPhoto(null)
+    setFuturePhoto(null)
+  }
 
   const resetIdleTimeout = () => {
     if (idleTimeout.current) clearTimeout(idleTimeout.current)
@@ -145,7 +151,7 @@ const App = () => {
                 originalPhoto={originalPhoto}
                 futurePhoto={futurePhoto}
                 photoId={photoId}
-                basename={basename}
+                reset={reset}
               />
               <UI
                 setCountdown={setCountdown}
