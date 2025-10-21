@@ -16,20 +16,21 @@ export default function Photos({ basename, photoId, pastPhoto, originalPhoto, fu
   const link = `${BACKEND_URL}/#/takeaway/${photoId}`;
   return (
     <div className="photos">
-      <div className="photos-strip">
-        <img className={`photos-strip-past ${pastPhoto ? '' : 'hidden'}`} src={pastPhoto} />
-        <img className={`photos--strip-present ${originalPhoto ? '' : 'hidden'}`} src={originalPhoto} />
-        <img className={`photos-strip-future ${futurePhoto ? '' : 'hidden'}`} src={futurePhoto} />
+      <div className="photos-frame">
+        <div className={`photos-frame-image past ${pastPhoto ? '' : 'hidden'}`}  ><img src={pastPhoto} /></div>
+        <div className={`photos-frame-image present ${originalPhoto ? '' : 'hidden'}`} ><img src={originalPhoto} /></div>
+        <div className={`photos-frame-image future ${futurePhoto ? '' : 'hidden'}`} ><img src={futurePhoto} /></div>
+        <div className={`photos-frame-download ${photoId ? '' : 'hidden'}`}>
+          <a
+            className="photos-download-link"
+            href={`#/takeaway/${photoId}`}
+            target="_blank"
+          >
+            <QRCode value={link} />
+          </a>
+        </div>
       </div>
-      <div className={`photos-download ${photoId ? '' : 'hidden'}`}>
-        <a
-          className="photos-download-link"
-          href={`#/takeaway/${photoId}`}
-          target="_blank"
-        >
-          <QRCode value={link} />
-        </a>
-      </div>
+
     </div>
   )
 }

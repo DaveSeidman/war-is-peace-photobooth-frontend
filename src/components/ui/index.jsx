@@ -1,20 +1,23 @@
 import React, { useState, useRef, useEffect } from "react";
-import frame from '../../assets/images/frame4.svg';
+import frameImage from '../../assets/images/frame4.svg';
+import logoImage from '../../assets/images/logo.png';
 import Camcornder from "./camcorder";
 import ActionButton from "./actionbutton";
 import './index.scss';
 
 
-export default function UI({ setCountdown, countdown, originalPhoto }) {
+export default function UI({ setCountdown, countdown, originalPhoto, pastPhoto }) {
 
   return (
     <div className="ui">
-      <img className="ui-frame" src={frame} />
+      <img className="ui-frame" src={frameImage} />
+      <img className="ui-logo" src={logoImage} />
       <Camcornder />
       <ActionButton
         setCountdown={setCountdown}
         countdown={countdown}
         originalPhoto={originalPhoto}
+        pastPhoto={pastPhoto}
       />
     </div>
   )

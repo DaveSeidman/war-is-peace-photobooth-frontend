@@ -1,10 +1,11 @@
 .attract {
   position: absolute;
-  inset: 0;
+  inset: 90px;
   display: flex;
   justify-content: center;
   align-items: center;
-  // background: rgba(255, 0, 0, .5);
+  background: rgba(0, 0, 0, .75);
+  backdrop-filter: blur(10px);
   transition: opacity .5s, visibility .5s;
 
   h1 {

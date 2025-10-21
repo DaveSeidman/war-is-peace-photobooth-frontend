@@ -4,7 +4,7 @@ import axios from 'axios';
 import UI from './components/ui';
 import Camera from './components/camera';
 import Countdown from './components/countdown';
-import Loading from './components/Loading';
+import Loading from './components/loading';
 import Photos from './components/photos';
 import Attract from './components/attract';
 import Idle from './components/idle';
@@ -29,7 +29,7 @@ const App = () => {
   const [controls, setControls] = useState(false);
   const [promptDefaults, setPromptDefaults] = useState(null);
 
-  const IDLE_DELAY = 30000;
+  const IDLE_DELAY = 300000;
   const ATTRACT_DELAY = 10000;
   const BACKEND_URL = location.host === 'daveseidman.github.io'
     ? 'https://war-is-peace-photobooth-backend.onrender.com'
@@ -131,13 +131,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={
             <>
-              <Photos
-                pastPhoto={pastPhoto}
-                originalPhoto={originalPhoto}
-                futurePhoto={futurePhoto}
-                photoId={photoId}
-                basename={basename}
-              />
+
               <Camera
                 started={started}
                 setStarted={setStarted}
@@ -146,10 +140,18 @@ const App = () => {
                 setOriginalPhoto={setOriginalPhoto}
                 setOriginalBlob={setOriginalBlob}
               />
+              <Photos
+                pastPhoto={pastPhoto}
+                originalPhoto={originalPhoto}
+                futurePhoto={futurePhoto}
+                photoId={photoId}
+                basename={basename}
+              />
               <UI
                 setCountdown={setCountdown}
                 countdown={countdown}
                 originalPhoto={originalPhoto}
+                pastPhoto={pastPhoto}
               />
               <Countdown
                 countdown={countdown}

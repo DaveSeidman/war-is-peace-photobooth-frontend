@@ -1,24 +1,30 @@
+@use '../../index.scss' as src;
+
 .photos {
   position: absolute;
   inset: 0;
   // pointer-events: none;
 
-  &-strip {
+  &-frame {
     position: absolute;
-    left: 75%;
-    top: 50%;
-    width: 25%;
-    height: 90%;
-    transform: translate(-50%, -50%) scaleX(-100%);
-    outline: 1px solid white;
+    inset: 80px;
     display: flex;
-    flex-direction: column;
+    // flex-direction: row;
+    flex-wrap: wrap;
+    gap: 30px;
+    background: src.$gray;
 
-    img {
-      height: 33%;
-      width: 100%;
-      object-fit: cover;
+    &-image {
+      width: calc(50% - 30px);
+      height: calc(50% - 30px);
+      
       transition: opacity 1s, visibility 1s;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
     }
   }
 

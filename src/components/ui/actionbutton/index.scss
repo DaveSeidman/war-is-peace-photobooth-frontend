@@ -6,6 +6,13 @@
   left: 50%;
   width: 440px;
   transform: translateX(-50%);
+  transition: transform .5s ease-in-out;
+
+  &.hidden {
+    visibility: visible !important;
+    opacity: 1 !important;
+    transform: translateX(-50%) translateY(100%);
+  }
 
   &-background {
 
