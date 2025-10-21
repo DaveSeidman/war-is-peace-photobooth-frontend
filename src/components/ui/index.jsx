@@ -6,11 +6,37 @@ import ActionButton from "../actionbutton";
 import './index.scss';
 
 
-export default function UI({ setCountdown, countdown, originalPhoto, pastPhoto }) {
+export default function UI({ attract, countdown, setCountdown, setTakePhoto, originalPhoto }) {
+  const countdownInterval = useRef();
+  const [count, setCount] = useState();
+
+  const tick = () => {
+    setCount((prev) => Math.max(prev - 1, 0));
+  }
 
   const takePhoto = () => {
+    setCount(3)
     setCountdown(true);
   }
+
+  useEffect(() => {
+    if (countdown) {
+      setCount(3);
+      countdownInterval.current = setInterval(tick, 1000);
+    }
+
+    return (() => {
+      if (countdownInterval.current) clearInterval(countdownInterval.current);
+    })
+  }, [countdown])
+
+  useEffect(() => {
+    if (count <= 0) {
+      setTakePhoto(true);
+      setCountdown(false);
+    }
+  }, [count])
+
   return (
     <div className="ui">
       <img className="ui-frame" src={frameImage} />
@@ -20,11 +46,11 @@ export default function UI({ setCountdown, countdown, originalPhoto, pastPhoto }
         originalPhoto={originalPhoto}
       />
       <ActionButton
-        label="engage"
+        label={count || "engage"}
         placement="bottom"
         action={takePhoto}
         setCountdown={setCountdown}
-        active={!countdown && !originalPhoto}
+        active={!originalPhoto && !attract}
       />
     </div>
   )

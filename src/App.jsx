@@ -3,7 +3,7 @@ import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import axios from 'axios';
 import UI from './components/ui';
 import Camera from './components/camera';
-import Countdown from './components/countdown';
+// import Countdown from './components/countdown';
 import Loading from './components/loading';
 import Photos from './components/photos';
 import Attract from './components/attract';
@@ -137,7 +137,6 @@ const App = () => {
         <Routes>
           <Route path="/" element={
             <>
-
               <Camera
                 started={started}
                 setStarted={setStarted}
@@ -154,15 +153,12 @@ const App = () => {
                 reset={reset}
               />
               <UI
-                setCountdown={setCountdown}
-                countdown={countdown}
-                originalPhoto={originalPhoto}
-                pastPhoto={pastPhoto}
-              />
-              <Countdown
                 countdown={countdown}
                 setCountdown={setCountdown}
                 setTakePhoto={setTakePhoto}
+                originalPhoto={originalPhoto}
+                pastPhoto={pastPhoto}
+                attract={attract}
               />
               <Loading loading={loading} />
               <Attract attract={attract} />
@@ -170,16 +166,9 @@ const App = () => {
               <Leva
                 hidden={!controls}
                 theme={{
-                  sizes: {
-                    rootWidth: '700px',
-                    controlWidth: '530px',
-                  },
-                  space: {
-                    colGap: '12px',
-                  },
-                  fontSizes: {
-                    root: '16px',
-                  },
+                  sizes: { rootWidth: '700px', controlWidth: '530px' },
+                  space: { colGap: '12px' },
+                  fontSizes: { root: '16px' },
                 }}
               />
             </>

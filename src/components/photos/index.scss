@@ -15,7 +15,6 @@
     &-image, &-download {
       width: calc(50% - 30px);
       height: calc(50% - 30px);
-      outline: 3px solid black;
       transition: opacity 1s, visibility 1s;
       position: relative;
       overflow: hidden;
@@ -28,9 +27,6 @@
     }
 
     &-download {
-      // display: flex;
-      // justify-content: center;
-      // align-items: center;
       background: src.$black;
 
       &-link {
@@ -52,6 +48,8 @@
 
         img {
           border: 16px solid src.$orange;
+          width: calc(100% - 32px);
+          height: calc(100% - 32px);
         }
       }
     }
