@@ -1,0 +1,26 @@
+@use '../../index.scss' as src;
+
+.ticker {
+  font-family: 'Digital';
+  bottom: 40px;
+  right: 0;
+  position: absolute;
+
+  width: 400px;
+  height: 70px;
+
+  &-background {
+    position: absolute;
+    inset: 0;
+  }
+  &-foreground {
+    position: absolute;
+    inset: 20px;
+    font-family: 'Digital';
+    text-transform: uppercase;
+    color: red;
+    font-size: 2rem;
+    word-spacing: 33px;
+    white-space: nowrap;
+  }
+}

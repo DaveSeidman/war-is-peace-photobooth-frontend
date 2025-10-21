@@ -12,7 +12,10 @@ export default function UI({ setCountdown, countdown, originalPhoto, pastPhoto }
     <div className="ui">
       <img className="ui-frame" src={frameImage} />
       <img className="ui-logo" src={logoImage} />
-      <Camcornder />
+      <Camcornder
+        countdown={countdown}
+        originalPhoto={originalPhoto}
+      />
       <ActionButton
         setCountdown={setCountdown}
         countdown={countdown}

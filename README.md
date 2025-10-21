@@ -10,7 +10,11 @@ A "Back to the Futrue" Themed photobooth that uses AI image editing to manipulat
 
 ### TODO:
 - make camcorder elements live
-
+- add error handling
+  - no network
+  - no image returned
+  - photo id not found
+  - ...
 
 
 ![photobooth](booth.png)

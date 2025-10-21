@@ -3,22 +3,21 @@
 .photos {
   position: absolute;
   inset: 0;
-  // pointer-events: none;
 
   &-frame {
     position: absolute;
-    inset: 80px;
+    inset: 90px;
     display: flex;
-    // flex-direction: row;
     flex-wrap: wrap;
     gap: 30px;
     background: src.$gray;
 
-    &-image {
+    &-image, &-download {
       width: calc(50% - 30px);
       height: calc(50% - 30px);
-      
+      outline: 3px solid black;
       transition: opacity 1s, visibility 1s;
+      position: relative;
 
       img {
         width: 100%;
@@ -26,25 +25,29 @@
         object-fit: cover;
       }
     }
-  }
 
-  &-download {
-    position: absolute;
-    top: 50%;
-    right: 0;
-    transform: translate(-50%, -50%);
+    &-download {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: src.$black;
 
-    &-link {
-      display: block;
-      width: 20vh;
-      height: 20vh;
-      
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
+      &-link {
+        display: block;
+        width: 20vh;
+        height: 20vh;
+        text-align: center;
+        font-family: 'Orbitron';
+        text-decoration: none;
+        color: src.$orange;
+        font-size: 2rem;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+
+        img {
+          border: 16px solid src.$orange;
+        }
       }
     }
-    
   }
 }
