@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 440.3 368.3">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#linear-gradient-8);
+      }
+
+      .cls-2 {
+        fill: url(#linear-gradient-7);
+      }
+
+      .cls-3 {
+        fill: url(#linear-gradient-5);
+      }
+
+      .cls-4 {
+        fill: url(#linear-gradient-6);
+      }
+
+      .cls-5 {
+        fill: url(#linear-gradient-9);
+      }
+
+      .cls-6 {
+        fill: url(#linear-gradient-4);
+      }
+
+      .cls-7 {
+        fill: url(#linear-gradient-3);
+      }
+
+      .cls-8 {
+        fill: url(#linear-gradient-2);
+      }
+
+      .cls-9 {
+        fill: #a3a2a2;
+      }
+
+      .cls-10 {
+        fill: url(#linear-gradient);
+      }
+
+      .cls-11 {
+        fill: url(#linear-gradient-10);
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="-1684" y1="-40.5" x2="-1684" y2="-18.1" gradientTransform="translate(-1442.6 -624.3) rotate(-152.5)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#757575"/>
+      <stop offset=".4" stop-color="#8f8585"/>
+      <stop offset="1" stop-color="#bababa"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="-1678.1" y1="-22" x2="-1661.6" y2="-22" gradientTransform="translate(59.3 -1490.1) rotate(-90)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#969696"/>
+      <stop offset="1" stop-color="#fff"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-3" x1="-1209.5" y1="1456.6" x2="-1209.5" y2="1479" gradientTransform="translate(-735.4 -1645.9) rotate(-65.5)" xlink:href="#linear-gradient"/>
+    <linearGradient id="linear-gradient-4" x1="-1215.2" y1="1475.8" x2="-1198.7" y2="1475.8" gradientTransform="translate(1304.7 -1413.1)" xlink:href="#linear-gradient-2"/>
+    <linearGradient id="linear-gradient-5" x1="-115.1" y1="1552.5" x2="-115.1" y2="1574.9" gradientTransform="translate(-140.9 -1505.5) rotate(-17.5)" xlink:href="#linear-gradient"/>
+    <linearGradient id="linear-gradient-6" x1="-123.5" y1="1565.5" x2="-107.1" y2="1565.5" gradientTransform="translate(334.6 -1545.8)" xlink:href="#linear-gradient-2"/>
+    <linearGradient id="linear-gradient-7" x1="840.2" y1="118.1" x2="840.2" y2="140.6" gradientTransform="translate(466.6 -775.9) rotate(90)" xlink:href="#linear-gradient"/>
+    <linearGradient id="linear-gradient-8" x1="839.8" y1="122.3" x2="856.2" y2="122.3" gradientTransform="translate(460.3 -784) rotate(90)" xlink:href="#linear-gradient-2"/>
+    <linearGradient id="linear-gradient-9" x1="-927.2" y1="-463.1" x2="-927.2" y2="-440.6" gradientTransform="translate(-523.7 -273.7) rotate(-180)" xlink:href="#linear-gradient"/>
+    <linearGradient id="linear-gradient-10" x1="-918.5" y1="-448.3" x2="-902" y2="-448.3" gradientTransform="translate(-507.3 -269.2) rotate(-180)" xlink:href="#linear-gradient-2"/>
+  </defs>
+  <!-- Generator: Adobe Illustrator 28.7.1, SVG Export Plug-In . SVG Version: 1.2.0 Build 142)  -->
+  <g>
+    <g id="Layer_1">
+      <circle class="cls-9" cx="219.9" cy="22.7" r="21.5"/>
+      <circle class="cls-9" cx="336.9" cy="65.7" r="21.5"/>
+      <circle class="cls-9" cx="402.9" cy="179.7" r="21.5"/>
+      <circle class="cls-9" cx="99.9" cy="65.7" r="21.5"/>
+      <circle class="cls-9" cx="38.9" cy="179.7" r="21.5"/>
+      <path class="cls-9" d="M220.5,368.2h210.7c5,0,8.8-4.6,7.8-9.6l-35.2-177.5c-12-91.4-90.2-161.9-184.9-161.9S43.6,92.1,33.5,185.6L1.6,358.8c-.9,4.9,2.9,9.4,7.9,9.4h210.6c0,0,.3,0,.3,0Z"/>
+      <g>
+        <circle class="cls-10" cx="37.5" cy="179.3" r="11.2"/>
+        <rect class="cls-8" x="35.7" y="171.5" width="3" height="16.5" transform="translate(-139.4 129.8) rotate(-62.5)"/>
+      </g>
+      <g>
+        <circle class="cls-7" cx="98.5" cy="63.3" r="11.2"/>
+        <rect class="cls-6" x="89.5" y="61.1" width="16.5" height="3" transform="translate(.2 125.6) rotate(-65.5)"/>
+      </g>
+      <g>
+        <circle class="cls-3" cx="219.5" cy="20.3" r="11.2"/>
+        <rect class="cls-4" x="211.1" y="18.2" width="16.5" height="3" transform="translate(4.2 66.9) rotate(-17.5)"/>
+      </g>
+      <g>
+        <circle class="cls-2" cx="337.2" cy="64.3" r="11.2" transform="translate(-3.1 109.1) rotate(-18.3)"/>
+        <rect class="cls-1" x="336.5" y="55.9" width="3" height="16.5" transform="translate(-3 109.4) rotate(-18.3)"/>
+      </g>
+      <g>
+        <circle class="cls-5" cx="403.5" cy="178.3" r="11.2"/>
+        <rect class="cls-11" x="395.3" y="177.6" width="16.5" height="3"/>
+      </g>
+    </g>
+  </g>
+</svg>

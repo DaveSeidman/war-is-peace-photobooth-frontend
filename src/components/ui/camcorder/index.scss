@@ -1,0 +1,55 @@
+@use '../../../index.scss' as src;
+
+.camcorder {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 1450px;
+    height: 720px;
+    pointer-events: none;
+
+    &-topleft, &-topright, &-bottomleft, &-bottomright {
+      position: absolute;
+      width: 130px;
+      height: 130px;
+      padding: 2rem;
+      p {
+        color: white;
+        margin: 1rem;
+        font-family: 'Inter';
+        text-transform: uppercase;
+        font-size: 2rem;
+        white-space: nowrap;
+        img {
+          height: 2rem;
+        }
+      }
+    }
+
+    &-topleft {
+      top: 0;
+      left: 0;
+      border-top: 2px solid white;
+      border-left: 2px solid white;
+    }
+    &-topright {
+      top: 0;
+      right: 0;
+      border-top: 2px solid white;
+      border-right: 2px solid white;
+      p { text-align: right;}
+    }
+    &-bottomleft {
+      bottom: 0;
+      left: 0;
+      border-bottom: 2px solid white;
+      border-left: 2px solid white;
+    }
+    &-bottomright {
+      bottom: 0;
+      right: 0;
+      border-bottom: 2px solid white;
+      border-right: 2px solid white;
+    }
+  }

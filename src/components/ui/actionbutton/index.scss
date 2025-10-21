@@ -1,0 +1,62 @@
+@use '../../../index.scss' as src;
+
+.actionbutton {
+  position: absolute;
+  bottom: 0px;
+  left: 50%;
+  width: 440px;
+  transform: translateX(-50%);
+
+  &-background {
+
+  }
+
+  &-foreground {
+    @keyframes slide {
+      0% {
+        background-position: 0 0
+      }
+      100% {
+        background-position: 220px, -220px;
+      }
+    }
+    position: absolute;
+    top: calc(50% + 20px);
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: none;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: repeating-linear-gradient(
+      45deg,
+      src.$black 0,
+      src.$black 45px,
+      src.$yellow 45px,
+      src.$yellow 100px
+    );
+    background-size: 141.42px 141.42px;
+    animation: slide 1s linear infinite;
+    
+    button {
+      border: none;
+      position: absolute;
+      inset: 40px;
+      font-family: 'Orbitron';
+      border-radius: 50%;
+      font-size: 2.25rem;
+      padding: 0;
+      text-transform: uppercase;
+      font-weight: 900;
+      background: src.$red;
+      box-shadow: 16px 20px 5px  rgba(0, 0, 0, .5);
+      transition: box-shadow .125s ease-in-out, transform .125s ease-in-out;
+      user-select: none;
+
+      &:active {
+        box-shadow: 0 0 5px rgba(0, 0, 0, .5);
+        transform: scale(.9)
+      }
+    }
+  }
+}
