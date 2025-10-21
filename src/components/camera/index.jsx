@@ -52,8 +52,17 @@ export default function Camera({ takePhoto, setTakePhoto, setOriginalPhoto, setO
 
     draw();
 
+    const gotoRandomTime = () => {
+      videoRef.current.currentTime = Math.random() * videoRef.current.duration;
+      videoRef.current.removeEventListener('canplaythrough', gotoRandomTime)
+    }
+    // start the fallback video at a random spot
+    videoRef.current.addEventListener('canplaythrough', gotoRandomTime)
+
     return () => {
       cancelAnimationFrame(frameRef.current);
+      videoRef.current.removeEventListener('canplaythrough', gotoRandomTime)
+
     };
   }, []);
 
