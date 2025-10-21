@@ -4,11 +4,13 @@
   pointer-events: none;
 
   &-video {
-    transform: scaleX(-1) translateY(-50%);
+    transform: scaleX(-1) translate(50%, -50%);
     position: absolute;
-    left: 12.5%;
     top: 50%;
-    width: 25%;
+    left: 50%;
+    width: calc(100% - 180px);
+    height: calc(100% - 180px);
+    object-fit: cover;
   }
 
   &-start {

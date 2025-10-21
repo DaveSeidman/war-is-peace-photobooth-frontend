@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import frame from '../../assets/images/frame4.svg';
 import './index.scss';
 
 export default function UI({
@@ -16,7 +17,7 @@ export default function UI({
       >
         Take Photo!
       </button>
-      {/* {awaitingEdit && (<p className="ui-loading">Loading...</p>)} */}
+      <img className="ui-frame" src={frame} />
     </div>
   )
 }

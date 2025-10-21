@@ -3,6 +3,11 @@
   inset: 0;
   pointer-events: none;
 
+  &-frame {
+    inset: 0;
+    position: absolute;
+  }
+
   &-capture {
     pointer-events: all;
     position: absolute;
@@ -11,34 +16,5 @@
     padding: .5rem 1rem;
     transform: translate(-50%, -50%);
     transition: opacity 1s, visibility 1s;
-  }
-
-  &-photos {
-    position: absolute;
-    right: 0;
-    width: 50%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-
-    &-photo {
-      height: 50%;
-      width: 100%;
-      object-fit: cover;
-      transform: scaleX(-100%);;
-    }
-  }
-
-  &-loading {
-    position: absolute;
-    left: 50%;
-    bottom: 25%;
-    width: 50%;
-    text-align: center;
-    font-weight: bold;
-    font-family: monospace;
-    font-size: 30px;
-    color: white;
-    margin: 0;
   }
 }
