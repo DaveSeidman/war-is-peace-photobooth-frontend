@@ -6,7 +6,9 @@ import './index.scss';
 
 export default function Ticker({ datetime, color }) {
 
-  const dateString = format(datetime, "MMM dd yyyy HH mm");
+  const dateString = format(datetime || new Date(), "MMM dd yyyy HH mm");
+  // TODO: a ticker style animation for the digits would look nice here
+  // try setting an initial value to be off by a random amount and then tween it to match datetime
 
   return (
     <div className="ticker">

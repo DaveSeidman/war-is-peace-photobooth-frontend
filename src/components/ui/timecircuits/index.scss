@@ -1,0 +1,14 @@
+@use '../../../index.scss' as src;
+
+.timecircuits {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 10px;
+  border-radius: 8px;
+  background: src.$gray;
+
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}

@@ -1,8 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
 import frameImage from '../../assets/images/frame4.svg';
 import logoImage from '../../assets/images/logo.png';
-import Camcornder from "./camcorder";
-import ActionButton from "../actionbutton";
+import Camcorder from "./camcorder";
+import TimeCurcuits from "./timecircuits";
+import LedMatrix from "./ledmatrix";
+import FluxCapacitor from './fluxcapacitor';
+import ActionButton from "../actionbutton"
 import './index.scss';
 
 
@@ -41,9 +44,17 @@ export default function UI({ attract, countdown, setCountdown, setTakePhoto, ori
     <div className="ui">
       <img className="ui-frame" src={frameImage} />
       <img className="ui-logo" src={logoImage} />
-      <Camcornder
-        countdown={countdown}
-        originalPhoto={originalPhoto}
+      <Camcorder
+        active={!countdown && !originalPhoto}
+      />
+      <TimeCurcuits
+        active={!originalPhoto}
+      />
+      <LedMatrix
+        active={!originalPhoto}
+      />
+      <FluxCapacitor
+        active={!originalPhoto}
       />
       <ActionButton
         label={count || "engage"}

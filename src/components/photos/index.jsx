@@ -24,25 +24,32 @@ export default function Photos({ reset, photoId, pastPhoto, originalPhoto, futur
     <div className={`photos ${originalPhoto ? '' : 'hidden'}`}>
       <div className="photos-frame">
         <div className={`photos-frame-image present ${originalPhoto ? '' : 'hidden'}`}>
-          <img src={originalPhoto} />
-          <Ticker
-            datetime={now}
-            color="red"
-          />
+          <img className="phtoos-frame-image-photo" src={originalPhoto} />
+          <div className="photos-frame-image-ticker">
+            <Ticker
+              datetime={now}
+              color="red"
+            />
+          </div>
         </div>
         <div className={`photos-frame-image past ${pastPhoto ? '' : 'hidden'}`}>
-          <img src={pastPhoto} />
-          <Ticker
-            datetime={pastDatetime}
-            color="green"
-          />
+          <img className="phtoos-frame-image-photo" src={pastPhoto} />
+          <div className="photos-frame-image-ticker">
+            <Ticker
+              datetime={pastDatetime}
+              color="green"
+            />
+          </div>
         </div>
         <div className={`photos-frame-image future ${futurePhoto ? '' : 'hidden'}`}>
-          <img src={futurePhoto} />
-          <Ticker
-            datetime={futureDateTime}
-            color="yellow"
-          />
+          <img className="phtoos-frame-image-photo" src={futurePhoto} />
+          <div className="photos-frame-image-ticker">
+
+            <Ticker
+              datetime={futureDateTime}
+              color="yellow"
+            />
+          </div>
         </div>
         <div className={`photos-frame-download ${photoId ? '' : 'hidden'}`}>
           <a

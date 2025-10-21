@@ -3,9 +3,9 @@ import iconPlay from '../../../assets/images/icon-play.svg'
 import iconRecord from '../../../assets/images/icon-record.svg'
 import './index.scss';
 
-export default function Camcornder({ countdown, originalPhoto }) {
+export default function Camcorder({ active }) {
   return (
-    <div className={`camcorder ${!countdown && !originalPhoto ? '' : 'hidden'}`}>
+    <div className={`camcorder ${active ? '' : 'hidden'}`}>
       {/* TODO: make all these "live" or at least respond to app state */}
       <div className="camcorder-topleft">
         <p>Play <img src={iconPlay} /></p>

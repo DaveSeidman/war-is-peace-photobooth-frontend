@@ -1,0 +1,12 @@
+@use '../../../index.scss' as src;
+
+.fluxcapacitor {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 175px;
+  height: 230px;
+  padding: 10px;
+  border-radius: 8px;
+  background: src.$gray;
+}

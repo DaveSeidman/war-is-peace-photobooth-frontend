@@ -2,10 +2,7 @@
 
 .ticker {
   font-family: 'Digital';
-  bottom: 40px;
-  right: 0;
-  position: absolute;
-
+  position: relative;
   width: 400px;
   height: 70px;
 
@@ -23,8 +20,7 @@
     white-space: nowrap;
 
     &.red { 
-    color: red;
-
+     color: red;
     }
     &.yellow {
       color: yellow;
