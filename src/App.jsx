@@ -182,8 +182,7 @@ const App = () => {
                 }}
               />
               {
-                // location.host === 'daveseidman.github.io' && 
-                !fullscreen && (
+                location.host === 'daveseidman.github.io' && !fullscreen && (
                   <button
                     type="button"
                     className="fullscreen"
