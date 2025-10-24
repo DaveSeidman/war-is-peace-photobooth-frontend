@@ -26,7 +26,8 @@ const App = () => {
   const [pastPhoto, setPastPhoto] = useState();
   const [futurePhoto, setFuturePhoto] = useState();
   const [controls, setControls] = useState(false);
-  const [promptDefaults, setPromptDefaults] = useState(null);
+  const [fullscreen, setFullscreen] = useState(false);
+  // const [promptDefaults, setPromptDefaults] = useState(null);
 
   const IDLE_DELAY = 300000;
   const ATTRACT_DELAY = 10000;
@@ -89,6 +90,10 @@ const App = () => {
     if (key === 'F1') setControls(prev => !prev);
   }
 
+  const toggleFullscreen = () => {
+
+  }
+
   useEffect(() => {
     if (originalPhoto) {
       // setAlteredPhoto(null)
@@ -106,6 +111,9 @@ const App = () => {
     }
   }, [attract])
 
+  const handleFullscreenChange = () => {
+    setFullscreen(document.fullscreenElement !== null);
+  };
 
   useEffect(() => {
     addEventListener('click', resetIdleTimeout);
@@ -122,11 +130,14 @@ const App = () => {
           removePrompt: data.remove ?? '',
         });
       })
-      .catch(err => console.error('Failed to load prompts', err));
+      .catch(err => console.log('Failed to load prompts'));
+
+    document.addEventListener("fullscreenchange", handleFullscreenChange);
 
     return (() => {
       removeEventListener('click', resetIdleTimeout);
       removeEventListener('keydown', keyDown);
+      document.removeEventListener("fullscreenchange", handleFullscreenChange);
     })
   }, [])
 
@@ -170,6 +181,24 @@ const App = () => {
                   fontSizes: { root: '16px' },
                 }}
               />
+              {
+                // location.host === 'daveseidman.github.io' && 
+                !fullscreen && (
+                  <button
+                    type="button"
+                    className="fullscreen"
+                    onClick={async () => {
+                      try {
+                        await document.documentElement.requestFullscreen();
+                        setFullscreen(true);
+                      } catch (err) {
+                        console.error("Failed to enter fullscreen:", err);
+                      }
+                    }}
+                  >
+                    Fullscreen
+                  </button>
+                )}
             </>
           } />
           <Route path="/takeaway/:photoId?" element={
