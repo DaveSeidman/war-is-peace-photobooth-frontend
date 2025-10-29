@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import axios from 'axios';
-import UI from './components/ui';
 import Camera from './components/camera';
-import Loading from './components/loading';
 import Photos from './components/photos';
+import VideoOverlay from './components/videooverlay';
+import EngageButton from './components/engagebutton';
 import Attract from './components/attract';
 import Idle from './components/idle';
 import Takeaway from './components/takeaway';
@@ -49,6 +49,32 @@ const App = () => {
     setOriginalPhoto(null)
     setPastPhoto(null)
     setFuturePhoto(null)
+  }
+
+  // Determine which video to show based on current state
+  const getVideoState = () => {
+    // Don't show video during attract state (use old Attract component)
+    if (attract) return null
+    if (idle) return 'idle'
+    if (loading) return 'loading'
+    if (originalPhoto && pastPhoto && futurePhoto) return 'results'
+    if (countdown) return 'countdown'
+    return 'idle' // default state
+  }
+
+  // Handle video end events
+  const handleVideoEnd = (state) => {
+    if (state === 'countdown') {
+      // Countdown video finished, capture photo
+      setCountdown(false)
+      setTakePhoto(true)
+    }
+    // Results video ends but stays visible (photos show through transparent areas)
+  }
+
+  // Handle engage button click
+  const handleEngage = () => {
+    setCountdown(true)
   }
 
   const resetIdleTimeout = () => {
@@ -162,15 +188,16 @@ const App = () => {
                 photoId={photoId}
                 reset={reset}
               />
-              <UI
-                countdown={countdown}
-                setCountdown={setCountdown}
-                setTakePhoto={setTakePhoto}
-                originalPhoto={originalPhoto}
-                pastPhoto={pastPhoto}
-                attract={attract}
+              {getVideoState() && (
+                <VideoOverlay
+                  state={getVideoState()}
+                  onVideoEnd={handleVideoEnd}
+                />
+              )}
+              <EngageButton
+                active={!attract && !countdown && !loading && !originalPhoto}
+                onClick={handleEngage}
               />
-              <Loading loading={loading} />
               <Attract attract={attract} />
               <Idle idle={idle} />
               <Leva

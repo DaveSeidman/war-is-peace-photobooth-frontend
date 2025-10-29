@@ -3,6 +3,7 @@
 .attract {
   position: absolute;
   inset: 0;
+  z-index: 15; // Above video overlay when active
   display: flex;
   justify-content: center;
   align-items: center;

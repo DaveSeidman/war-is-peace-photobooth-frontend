@@ -48,5 +48,6 @@ html, body, #root, .app {
     position: absolute;
     bottom: 0;
     left: 0;
+    z-index: 100; // Above all other elements
   }
 }

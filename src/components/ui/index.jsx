@@ -43,11 +43,11 @@ export default function UI({ attract, countdown, setCountdown, setTakePhoto, ori
   return (
     <div className="ui">
       <img className="ui-frame" src={frameImage} />
-      <img className="ui-logo" src={logoImage} />
+      {/* <img className="ui-logo" src={logoImage} /> */}
       <Camcorder
         active={!countdown && !originalPhoto}
       />
-      <TimeCurcuits
+      {/* <TimeCurcuits
         active={!originalPhoto}
       />
       <LedMatrix
@@ -55,7 +55,7 @@ export default function UI({ attract, countdown, setCountdown, setTakePhoto, ori
       />
       <FluxCapacitor
         active={!originalPhoto}
-      />
+      /> */}
       <ActionButton
         label={count || "engage"}
         placement="bottom"
