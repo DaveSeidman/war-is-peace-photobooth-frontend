@@ -9,17 +9,17 @@ export default function Takeaway() {
     : `http://${location.hostname}:8000`;
 
   const { photoId } = useParams();
-  const photoUrl = photoId ? `${BACKEND_URL}/photos/${photoId}.jpg` : null;
-
+  const normalPhotoURL = photoId ? `${BACKEND_URL}/photos/${photoId}.jpg` : null;
+  const trickPhotoURL = photoId ? `${BACKEND_URL}/photos/${photoId}.gif` : null;
   const handleShare = async () => {
-    if (!photoUrl || !navigator.share) {
+    if (!normalPhotoURL || !navigator.share) {
       // fallback for browsers that don’t support the API
-      window.open(photoUrl, "_blank");
+      window.open(normalPhotoURL, "_blank");
       return;
     }
 
     try {
-      const response = await fetch(photoUrl);
+      const response = await fetch(trickPhotoURL);
       const blob = await response.blob();
       const file = new File([blob], `${photoId}.gif`, { type: blob.type });
 
@@ -35,12 +35,12 @@ export default function Takeaway() {
 
   return (
     <div className="takeaway">
-      {photoUrl ? (
+      {normalPhotoURL ? (
         <>
           <img
             crossOrigin="anonymous"
             className="takeaway-photo"
-            src={photoUrl}
+            src={normalPhotoURL}
             alt="Your photo"
           />
 
