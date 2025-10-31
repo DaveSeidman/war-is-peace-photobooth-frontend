@@ -29,7 +29,7 @@ const App = () => {
   const [triggerCapture, setTriggerCapture] = useState(false);
 
   const RESET_DELAY = 92000; // 90 seconds
-  const BACKEND_URL = location.host === 'daveseidman.github.io'
+  const BACKEND_URL = location.host === 'war--is--peace.com'
     ? 'https://war-is-peace-photobooth-backend.onrender.com'
     : `http://${location.hostname}:8000`
   const basename = 'war-is-peace-photobooth-frontend'
@@ -228,7 +228,7 @@ const App = () => {
                 }}
               />
               {
-                location.host === 'daveseidman.github.io' && !fullscreen && (
+                location.host === 'war--is--peace.com' && !fullscreen && (
                   <button
                     type="button"
                     className="fullscreen"

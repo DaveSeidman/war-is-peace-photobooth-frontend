@@ -9,7 +9,7 @@ import './index.scss';
 
 export default function Photos({ photoId, pastPhoto, originalPhoto, futurePhoto, showResults }) {
 
-  const BACKEND_URL = location.host === 'daveseidman.github.io'
+  const BACKEND_URL = location.host === 'war--is--peace.com'
     ? location.href
     : `http://${location.hostname}:8080`
 
