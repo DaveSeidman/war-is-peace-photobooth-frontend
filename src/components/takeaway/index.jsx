@@ -9,7 +9,7 @@ export default function Takeaway() {
     : `http://${location.hostname}:8000`;
 
   const { photoId } = useParams();
-  const photoUrl = photoId ? `${BACKEND_URL}/photos/${photoId}.gif` : null;
+  const photoUrl = photoId ? `${BACKEND_URL}/photos/${photoId}.jpg` : null;
 
   const handleShare = async () => {
     if (!photoUrl || !navigator.share) {
