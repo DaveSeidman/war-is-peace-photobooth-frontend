@@ -1,5 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
+import { Leva } from "leva";
 import './index.scss';
 
 export default function Takeaway() {
@@ -55,6 +56,7 @@ export default function Takeaway() {
       ) : (
         <p>Sorry, we couldn't find your photo</p>
       )}
+      <Leva hidden />
     </div>
   );
 }
