@@ -4,7 +4,7 @@ import { Leva } from "leva";
 import './index.scss';
 
 export default function Takeaway() {
-  const BACKEND_URL = location.host === 'daveseidman.github.io'
+  const BACKEND_URL = location.host === 'war--is--peace.com'
     ? 'https://war-is-peace-photobooth-backend.onrender.com'
     : `http://${location.hostname}:8000`;
 
