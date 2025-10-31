@@ -122,28 +122,24 @@ export default function VideoOverlay({ state, onVideoEnd }) {
         className={`${activeVideo === 'idle' ? 'active' : 'inactive'} ${VIDEO_CONFIG.idle.fade ? 'fade' : ''}`}
         onEnded={() => handleVideoEnd('idle')}
         playsInline
-        muted
       />
       <video
         ref={countdownVideoRef}
         className={`${activeVideo === 'countdown' ? 'active' : 'inactive'} ${VIDEO_CONFIG.countdown.fade ? 'fade' : ''}`}
         onEnded={() => handleVideoEnd('countdown')}
         playsInline
-        muted
       />
       <video
         ref={loadingVideoRef}
         className={`${activeVideo === 'loading' ? 'active' : 'inactive'} ${VIDEO_CONFIG.loading.fade ? 'fade' : ''}`}
         onEnded={() => console.log('Loading video ended, about to loop')}
         playsInline
-        muted
       />
       <video
         ref={resultsVideoRef}
         className={`${activeVideo === 'results' ? 'active' : 'inactive'} ${VIDEO_CONFIG.results.fade ? 'fade' : ''}`}
         onEnded={() => handleVideoEnd('results')}
         playsInline
-        muted
       />
     </div>
   )
