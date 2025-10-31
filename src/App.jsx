@@ -7,6 +7,7 @@ import VideoOverlay from './components/videooverlay';
 import EngageButton from './components/engagebutton';
 import ResetButton from './components/resetbutton';
 import Takeaway from './components/takeaway';
+import Capture from './components/Capture';
 import { Leva, useControls } from 'leva';
 
 import './index.scss';
@@ -25,8 +26,9 @@ const App = () => {
   const [controls, setControls] = useState(false);
   const [fullscreen, setFullscreen] = useState(false);
   const [showResults, setShowResults] = useState(false);
+  const [triggerCapture, setTriggerCapture] = useState(false);
 
-  const RESET_DELAY = 60000; // 1 minute
+  const RESET_DELAY = 92000; // 90 seconds
   const BACKEND_URL = location.host === 'daveseidman.github.io'
     ? 'https://war-is-peace-photobooth-backend.onrender.com'
     : `http://${location.hostname}:8000`
@@ -45,6 +47,7 @@ const App = () => {
     setPastPhoto(null)
     setFuturePhoto(null)
     setShowResults(false)
+    setTriggerCapture(false)
   }
 
   // Determine which video to show based on current state
@@ -58,8 +61,9 @@ const App = () => {
   // Handle video end events
   const handleVideoEnd = (state) => {
     if (state === 'countdown') {
-      // Countdown video finished, capture photo
+      // Countdown video finished, trigger capture animation and take photo
       setCountdown(false)
+      setTriggerCapture(true)
       setTakePhoto(true)
     }
     // Results video ends but stays visible (photos show through transparent areas)
@@ -101,10 +105,17 @@ const App = () => {
     data.append("pastPrompt", pastPrompt);
     data.append("futurePrompt", futurePrompt);
     data.append("removePrompt", removePrompt);
+
+    const startTime = Date.now();
+    console.log('Loading started...');
     setLoading(true);
     setPhotoId(null)
+
     const response = await axios.post(url, data, options)
+    const loadingTime = ((Date.now() - startTime) / 1000).toFixed(2);
+    console.log(`Loading completed in ${loadingTime}s`);
     console.log(response)
+
     setLoading(false);
     if (!response.data.output) return console.log('no output')
     setPastPhoto(response.data.output.past)
@@ -195,6 +206,10 @@ const App = () => {
                   onVideoEnd={handleVideoEnd}
                 />
               )}
+              <Capture
+                originalPhoto={originalPhoto}
+                trigger={triggerCapture}
+              />
               <EngageButton
                 active={!countdown && !loading && !originalPhoto}
                 onClick={handleEngage}

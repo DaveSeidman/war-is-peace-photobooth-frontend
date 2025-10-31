@@ -1,0 +1,119 @@
+.capture-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+}
+
+.flash {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  animation: flashEffect 0.8s ease-out;
+  box-shadow: 0 0 100px 50px rgba(255, 255, 255, 0.9);
+}
+
+@keyframes flashEffect {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.photo-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.captured-photo {
+  width: 75%;
+  height: auto;
+  object-fit: contain;
+  animation:
+    spin 3.5s linear forwards,
+    shrinkAndFade 3.5s ease-in forwards,
+    flyAroundRandom 3.5s ease-in-out forwards,
+    flip 3.5s ease-in-out forwards;
+}
+
+@keyframes spin {
+  0% {
+    rotate: 0deg;
+  }
+  100% {
+    rotate: 1440deg;
+  }
+}
+
+@keyframes shrinkAndFade {
+  0% {
+    scale: 1;
+    opacity: 0.9;
+  }
+  40% {
+    scale: 0.15;
+    opacity: 0.6;
+  }
+  70% {
+    scale: 0.05;
+    opacity: 0.3;
+  }
+  100% {
+    scale: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes flyAround {
+  0% {
+    translate: 0 0;
+  }
+  15% {
+    translate: -8vw 12vh;
+  }
+  30% {
+    translate: 15vw -8vh;
+  }
+  45% {
+    translate: -12vw -15vh;
+  }
+  60% {
+    translate: 10vw 10vh;
+  }
+  75% {
+    translate: -6vw -10vh;
+  }
+  90% {
+    translate: 8vw 6vh;
+  }
+  100% {
+    translate: 0 0;
+  }
+}
+
+@keyframes flip {
+  0% {
+    transform: rotateX(0deg) rotateY(0deg);
+  }
+  50% {
+    transform: rotateX(180deg) rotateY(180deg);
+  }
+  100% {
+    transform: rotateX(360deg) rotateY(360deg);
+  }
+}
