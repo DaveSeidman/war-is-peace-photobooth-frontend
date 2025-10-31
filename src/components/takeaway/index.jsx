@@ -21,12 +21,12 @@ export default function Takeaway() {
     try {
       const response = await fetch(photoUrl);
       const blob = await response.blob();
-      const file = new File([blob], `${photoId}.jpg`, { type: blob.type });
+      const file = new File([blob], `${photoId}.gif`, { type: blob.type });
 
       await navigator.share({
         files: [file],
-        title: 'Your photo',
-        text: 'Save or share your photo!',
+        title: 'War is Peace',
+        text: 'It\'s like they were never born...',
       });
     } catch (err) {
       console.error("Sharing failed:", err);
