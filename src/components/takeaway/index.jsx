@@ -9,7 +9,7 @@ export default function Takeaway() {
     : `http://${location.hostname}:8000`;
 
   const { photoId } = useParams();
-  const photoUrl = photoId ? `${BACKEND_URL}/photos/${photoId}.jpg` : null;
+  const photoUrl = photoId ? `${BACKEND_URL}/photos/${photoId}.gif` : null;
 
   const handleShare = async () => {
     if (!photoUrl || !navigator.share) {
@@ -35,11 +35,6 @@ export default function Takeaway() {
 
   return (
     <div className="takeaway">
-      {/* <div className="takeaway-title">
-        <h1>Takeaway</h1>
-        <p>{photoId}</p>
-      </div> */}
-
       {photoUrl ? (
         <>
           <img
