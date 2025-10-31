@@ -11,9 +11,13 @@
     height: 100%;
     object-fit: cover;
     display: block;
-    transition: none; // Instant cut, no fade
+    transition: none; // Instant cut by default
     backface-visibility: hidden; // Prevents flicker
     -webkit-backface-visibility: hidden;
+
+    &.fade {
+      transition: opacity 0.3s ease-in-out; // Quick fade for specific videos
+    }
 
     &.active {
       opacity: 1;

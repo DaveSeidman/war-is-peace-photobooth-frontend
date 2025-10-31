@@ -3,12 +3,11 @@
 
 import React from "react";
 import { QRCode } from 'react-qrcode'
-import ActionButton from "../actionbutton";
 import Ticker from "../ticker";
 
 import './index.scss';
 
-export default function Photos({ reset, photoId, pastPhoto, originalPhoto, futurePhoto }) {
+export default function Photos({ photoId, pastPhoto, originalPhoto, futurePhoto, showResults }) {
 
   const BACKEND_URL = location.host === 'daveseidman.github.io'
     ? location.href
@@ -23,33 +22,14 @@ export default function Photos({ reset, photoId, pastPhoto, originalPhoto, futur
   return (
     <div className={`photos ${originalPhoto ? '' : 'hidden'}`}>
       <div className="photos-frame">
-        <div className={`photos-frame-image present ${originalPhoto ? '' : 'hidden'}`}>
+        <div className={`photos-frame-image present ${originalPhoto ? '' : 'hidden'} ${showResults ? 'fade-in' : ''}`}>
           <img className="phtoos-frame-image-photo" src={originalPhoto} />
-          <div className="photos-frame-image-ticker">
-            <Ticker
-              datetime={now}
-              color="red"
-            />
-          </div>
         </div>
-        <div className={`photos-frame-image past ${pastPhoto ? '' : 'hidden'}`}>
+        <div className={`photos-frame-image past ${pastPhoto ? '' : 'hidden'} ${showResults ? 'fade-in fade-in-delay-1' : ''}`}>
           <img className="phtoos-frame-image-photo" src={pastPhoto} />
-          <div className="photos-frame-image-ticker">
-            <Ticker
-              datetime={pastDatetime}
-              color="green"
-            />
-          </div>
         </div>
-        <div className={`photos-frame-image future ${futurePhoto ? '' : 'hidden'}`}>
+        <div className={`photos-frame-image future ${futurePhoto ? '' : 'hidden'} ${showResults ? 'fade-in fade-in-delay-2' : ''}`}>
           <img className="phtoos-frame-image-photo" src={futurePhoto} />
-          <div className="photos-frame-image-ticker">
-
-            <Ticker
-              datetime={futureDateTime}
-              color="yellow"
-            />
-          </div>
         </div>
         <div className={`photos-frame-download ${photoId ? '' : 'hidden'}`}>
           <a
@@ -66,14 +46,7 @@ export default function Photos({ reset, photoId, pastPhoto, originalPhoto, futur
               margin={2}
 
             />
-            Download
           </a>
-          <ActionButton
-            label="Reset"
-            active={originalPhoto && pastPhoto && futurePhoto}
-            placement="right"
-            action={reset}
-          />
         </div>
       </div>
 

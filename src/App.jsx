@@ -5,8 +5,7 @@ import Camera from './components/camera';
 import Photos from './components/photos';
 import VideoOverlay from './components/videooverlay';
 import EngageButton from './components/engagebutton';
-import Attract from './components/attract';
-import Idle from './components/idle';
+import ResetButton from './components/resetbutton';
 import Takeaway from './components/takeaway';
 import { Leva, useControls } from 'leva';
 
@@ -14,8 +13,6 @@ import './index.scss';
 
 const App = () => {
 
-  const [attract, setAttract] = useState(true);
-  const [idle, setIdle] = useState(false);
   const [started, setStarted] = useState(false);
   const [countdown, setCountdown] = useState(false);
   const [takePhoto, setTakePhoto] = useState(false);
@@ -27,16 +24,14 @@ const App = () => {
   const [futurePhoto, setFuturePhoto] = useState();
   const [controls, setControls] = useState(false);
   const [fullscreen, setFullscreen] = useState(false);
-  // const [promptDefaults, setPromptDefaults] = useState(null);
+  const [showResults, setShowResults] = useState(false);
 
-  const IDLE_DELAY = 300000;
-  const ATTRACT_DELAY = 10000;
+  const RESET_DELAY = 60000; // 1 minute
   const BACKEND_URL = location.host === 'daveseidman.github.io'
     ? 'https://war-is-peace-photobooth-backend.onrender.com'
     : `http://${location.hostname}:8000`
   const basename = 'war-is-peace-photobooth-frontend'
-  const idleTimeout = useRef();
-  const attractTimeout = useRef();
+  const resetTimeout = useRef();
 
   const [{ pastPrompt, futurePrompt, removePrompt }, set] = useControls(() => ({
     pastPrompt: { value: '' },
@@ -49,13 +44,11 @@ const App = () => {
     setOriginalPhoto(null)
     setPastPhoto(null)
     setFuturePhoto(null)
+    setShowResults(false)
   }
 
   // Determine which video to show based on current state
   const getVideoState = () => {
-    // Don't show video during attract state (use old Attract component)
-    if (attract) return null
-    if (idle) return 'idle'
     if (loading) return 'loading'
     if (originalPhoto && pastPhoto && futurePhoto) return 'results'
     if (countdown) return 'countdown'
@@ -77,20 +70,27 @@ const App = () => {
     setCountdown(true)
   }
 
-  const resetIdleTimeout = () => {
-    if (idleTimeout.current) clearTimeout(idleTimeout.current)
-    if (attractTimeout.current) clearTimeout(attractTimeout.current)
+  const startResetTimer = () => {
+    if (resetTimeout.current) clearTimeout(resetTimeout.current)
 
-    setIdle(false);
-    setAttract(false);
+    console.log('Reset timer started - will reset in 1 minute');
+    const startTime = Date.now();
 
-    idleTimeout.current = setTimeout(() => {
-      setIdle(true);
-      attractTimeout.current = setTimeout(() => {
-        setAttract(true);
-        setIdle(false)
-      }, ATTRACT_DELAY);
-    }, IDLE_DELAY);
+    // Log every 30 seconds
+    const logInterval = setInterval(() => {
+      const elapsed = Math.floor((Date.now() - startTime) / 1000);
+      console.log(`Reset timer: ${elapsed}s elapsed`);
+    }, 30000);
+
+    resetTimeout.current = setTimeout(() => {
+      clearInterval(logInterval);
+      console.log('Reset timer completed - resetting app');
+      reset();
+    }, RESET_DELAY);
+
+    // Store interval so we can clear it if timer is restarted
+    if (resetTimeout.logInterval) clearInterval(resetTimeout.logInterval);
+    resetTimeout.logInterval = logInterval;
   }
 
   const uploadPhoto = async (photo) => {
@@ -128,21 +128,20 @@ const App = () => {
 
   }, [originalPhotoBlob])
 
+
+  // Trigger results animation when all photos are ready and start reset timer
   useEffect(() => {
-    if (attract) {
-      setOriginalBlob(null);
-      setOriginalPhoto(null);
-      setPastPhoto(null);
-      setFuturePhoto(null)
+    if (originalPhoto && pastPhoto && futurePhoto) {
+      setShowResults(true);
+      startResetTimer();
     }
-  }, [attract])
+  }, [originalPhoto, pastPhoto, futurePhoto])
 
   const handleFullscreenChange = () => {
     setFullscreen(document.fullscreenElement !== null);
   };
 
   useEffect(() => {
-    addEventListener('click', resetIdleTimeout);
     addEventListener('keydown', keyDown);
     fetch(`${BACKEND_URL}/prompts`)
       .then(res => res.json())
@@ -161,9 +160,11 @@ const App = () => {
     document.addEventListener("fullscreenchange", handleFullscreenChange);
 
     return (() => {
-      removeEventListener('click', resetIdleTimeout);
       removeEventListener('keydown', keyDown);
       document.removeEventListener("fullscreenchange", handleFullscreenChange);
+      // Clean up timer on unmount
+      if (resetTimeout.current) clearTimeout(resetTimeout.current);
+      if (resetTimeout.logInterval) clearInterval(resetTimeout.logInterval);
     })
   }, [])
 
@@ -186,7 +187,7 @@ const App = () => {
                 originalPhoto={originalPhoto}
                 futurePhoto={futurePhoto}
                 photoId={photoId}
-                reset={reset}
+                showResults={showResults}
               />
               {getVideoState() && (
                 <VideoOverlay
@@ -195,11 +196,14 @@ const App = () => {
                 />
               )}
               <EngageButton
-                active={!attract && !countdown && !loading && !originalPhoto}
+                active={!countdown && !loading && !originalPhoto}
                 onClick={handleEngage}
               />
-              <Attract attract={attract} />
-              <Idle idle={idle} />
+              <ResetButton
+                label="Reset"
+                active={originalPhoto && pastPhoto && futurePhoto}
+                action={reset}
+              />
               <Leva
                 hidden={!controls}
                 theme={{
