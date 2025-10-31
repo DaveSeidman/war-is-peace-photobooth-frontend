@@ -3,43 +3,72 @@ import testVideo from '../../assets/videos/test.mp4';
 import "./index.scss";
 
 export default function Camera({ takePhoto, setTakePhoto, setOriginalPhoto, setOriginalBlob }) {
-  const [cameraStarted, setCameraStarted] = useState(false);
+  const [useTestVideo, setUseTestVideo] = useState(false);
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const frameRef = useRef(null);
 
-  const toggleCamera = async () => {
-    if (!cameraStarted) {
-      // Start webcam
-      const stream = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: "user" },
-        audio: false,
-      });
-      videoRef.current.srcObject = stream;
-      videoRef.current.loop = false; // stop looping the background video
-      setCameraStarted(true);
-    } else {
-      // Stop webcam
-      const stream = videoRef.current.srcObject;
-      if (stream && stream.getTracks) {
-        stream.getTracks().forEach((track) => track.stop());
-      }
+  const startCamera = async () => {
+    // Start webcam
+    const stream = await navigator.mediaDevices.getUserMedia({
+      video: { facingMode: "user" },
+      audio: false,
+    });
+    videoRef.current.srcObject = stream;
+    videoRef.current.loop = false;
+  };
 
-      // Clear webcam feed
-      videoRef.current.srcObject = null;
+  const stopCamera = () => {
+    // Stop webcam
+    const stream = videoRef.current.srcObject;
+    if (stream && stream.getTracks) {
+      stream.getTracks().forEach((track) => track.stop());
+    }
+    videoRef.current.srcObject = null;
+  };
 
-      // Reset to your test video and resume playback
+  const toggleTestVideo = async () => {
+    if (!useTestVideo) {
+      // Switch to test video
+      stopCamera();
       videoRef.current.src = testVideo;
       videoRef.current.loop = true;
-      await videoRef.current.play().catch(() => { }); // avoid unhandled promise errors
-
-      setCameraStarted(false);
+      await videoRef.current.play().catch(() => {});
+      setUseTestVideo(true);
+    } else {
+      // Switch back to camera
+      videoRef.current.src = '';
+      await startCamera();
+      setUseTestVideo(false);
     }
   };
 
 
+  // Start camera on mount
   useEffect(() => {
+    startCamera();
 
+    return () => {
+      stopCamera();
+    };
+  }, []);
+
+  // Handle F1 key for toggling test video
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'F1') {
+        e.preventDefault();
+        toggleTestVideo();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [useTestVideo]);
+
+  useEffect(() => {
     const ctx = canvasRef.current.getContext('2d');
 
     const draw = () => {
@@ -56,13 +85,12 @@ export default function Camera({ takePhoto, setTakePhoto, setOriginalPhoto, setO
       videoRef.current.currentTime = Math.random() * videoRef.current.duration;
       videoRef.current.removeEventListener('canplaythrough', gotoRandomTime)
     }
-    // start the fallback video at a random spot
+    // start the fallback video at a random spot (only for test video)
     videoRef.current.addEventListener('canplaythrough', gotoRandomTime)
 
     return () => {
       cancelAnimationFrame(frameRef.current);
       videoRef.current.removeEventListener('canplaythrough', gotoRandomTime)
-
     };
   }, []);
 
@@ -94,12 +122,8 @@ export default function Camera({ takePhoto, setTakePhoto, setOriginalPhoto, setO
         playsInline
         muted
         loop
-      >
-        <source src={testVideo} />
-      </video>
+      />
       <canvas ref={canvasRef} className="camera-canvas" />
-      {/* TODO add toggle to turn off camera as well */}
-      {<button className="camera-start" onClick={toggleCamera}>{cameraStarted ? 'stop camera' : 'start camera'}</button>}
     </div>
   );
 }

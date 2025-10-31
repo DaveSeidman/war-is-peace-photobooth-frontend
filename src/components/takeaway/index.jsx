@@ -34,10 +34,10 @@ export default function Takeaway() {
 
   return (
     <div className="takeaway">
-      <div className="takeaway-title">
+      {/* <div className="takeaway-title">
         <h1>Takeaway</h1>
         <p>{photoId}</p>
-      </div>
+      </div> */}
 
       {photoUrl ? (
         <>
@@ -50,7 +50,6 @@ export default function Takeaway() {
 
           {/* Share Button (works natively on iOS/Android) */}
           <button className="takeaway-download" onClick={handleShare}>
-            📱 Share or Save Photo
           </button>
         </>
       ) : (

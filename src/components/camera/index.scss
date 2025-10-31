@@ -1,6 +1,7 @@
 .camera {
   position: absolute;
   inset: 0;
+  z-index: 1; // Bottom layer - webcam feed
   pointer-events: none;
 
   &-video {

@@ -1,0 +1,66 @@
+@use '../../index.scss' as src;
+
+.resetbutton {
+  position: absolute;
+  bottom: 117px;
+  right: 60px;
+  transition: transform .5s ease-in-out;
+  pointer-events: all;
+  z-index: 15; // Above VideoOverlay (z-index: 10), below Leva (z-index: 100)
+
+  &.bottom {
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  &.right {
+    right: 0;
+    top: 50%;
+    transform: rotate(-90deg) translateY(0) translateX(-50%);
+    transform-origin: 0 0;
+
+    .resetbutton {
+      &-foreground {
+        transform: rotate(90deg);
+        transform-origin: 50% 0;
+      }
+    }
+  }
+
+  &.hidden {
+    visibility: hidden !important;
+    opacity: 0 !important;
+  }
+
+  &.hidden.bottom {
+    transform: translateX(-50%) translateY(100%) !important;
+  }
+
+  &-background {
+
+  }
+
+  &-foreground {
+    border: none;
+    width: 325px;
+    height: 165px;
+        
+
+
+    button {
+      border: none;
+      background: transparent;
+      position: absolute;
+      inset: 40px;
+      font-family: 'Orbitron';
+      font-size: 2.25rem;
+      padding: 0 !important;
+      text-transform: uppercase;
+      font-weight: 900;
+      user-select: none;
+
+
+    }
+  }
+}

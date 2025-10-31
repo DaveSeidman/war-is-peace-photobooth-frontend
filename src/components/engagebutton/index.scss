@@ -1,0 +1,26 @@
+.engage-button {
+  position: absolute;
+  z-index: 20; // Above video overlay
+  cursor: pointer;
+
+  // TODO: Position this where the ENGAGE button appears in idle.mp4
+  // Adjust these values to match your video
+  bottom: 1%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 225px;
+
+  // Debug: uncomment to see clickable area
+  // background: rgba(255, 0, 0, 0.3);
+  // border: 2px dashed red;
+
+  // &:hover {
+  //   // Optional: subtle visual feedback
+  //   background: rgba(255, 255, 255, 0.05);
+  // }
+
+  // &:active {
+  //   background: rgba(255, 255, 255, 0.1);
+  // }
+}

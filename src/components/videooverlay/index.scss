@@ -1,0 +1,34 @@
+.video-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+
+  video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: none; // Instant cut by default
+    backface-visibility: hidden; // Prevents flicker
+    -webkit-backface-visibility: hidden;
+
+    &.fade {
+      transition: opacity 0.3s ease-in-out; // Quick fade for specific videos
+    }
+
+    &.active {
+      opacity: 1;
+      pointer-events: auto;
+      visibility: visible;
+    }
+
+    &.inactive {
+      opacity: 0;
+      pointer-events: none;
+      visibility: hidden;
+    }
+  }
+}
